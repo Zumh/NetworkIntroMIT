@@ -1,8 +1,35 @@
 Fetch web page by hand using telnet
  telnet cs144.keithw.org http
-<ctrl + ]>
- GET /hello HTTP/1.1 + <ENTER>
-Host: cs144.keithw.org + <ENTER>
-Connection: close + <ENTER>
-<ENTER>
+<ctrl + ]> //start command line
+close + <ENTER> //close telnet
+ GET /hello HTTP/1.1 + <ENTER> // request HTTP web page
+Host: cs144.keithw.org + <ENTER> // for this host
+Connection: close + <ENTER> // tell server to close as soon as you done requesting
+<ENTER> // request to server close
+If you want to close 
+
 You will get a success response or failure
+
+### RESULT ###
+INPUT:
+telnet cs144.keithw.org http
+Trying 104.196.238.229...
+Connected to cs144.keithw.org.
+Escape character is '^]'.
+GET /hello HTTP/1.1
+Host: cs144.keithw.org
+Connection: close
+
+OUTPUT:
+HTTP/1.1 200 OK
+Date: Wed, 27 Sep 2023 13:20:06 GMT
+Server: Apache
+Last-Modified: Thu, 13 Dec 2018 15:45:29 GMT
+ETag: "e-57ce93446cb64"
+Accept-Ranges: bytes
+Content-Length: 14
+Connection: close
+Content-Type: text/plain
+
+Hello, CS144!
+Connection closed by foreign host.
