@@ -1,0 +1,11 @@
+Server listinging for connection in port 9090
+netcat -v -l -p 9090
+
+
+Client connect to server on port 9090
+telnet localhost 9090
+
+both can communicate through localhost port 9090
+
+ctrl-C for netcat closing
+
