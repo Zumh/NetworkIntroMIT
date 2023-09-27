@@ -1,0 +1,4 @@
+Enable vmware to bridge mode for traceroute to work correctly
+Else you have to disable firewall of the host machine
+OR create ICMP friendly rules for windows
+https://superuser.com/questions/1412029/traceroute-shows-just-in-linux-in-a-virtual-machine-although-displays
