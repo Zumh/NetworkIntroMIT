@@ -1,0 +1,18 @@
+This command initiates an SSL/TLS connection to Gmail's SMTP server (smtp.gmail.com) on port 587 with the starttls command, and it uses CRLF line endings. This is a common way to securely send email using SMTP with encryption.
+
+openssl s_client -starttls smtp -connect smtp.gmail.com:587 -crlf
+
+EHLO student.com -> lead to handshake SSL
+- auth login -> 334 VXNlcm5hbWU6 // means we have to input 64base encoded username and password
+- https://www.base64encode.org/
+	- encode username with base64 > 334 UGFzc3dvcmQ6 // mean we the server accept us and we need password
+	- encode password with base64 > 235 2.7.0 Accepted // we are in 
+- MAIL FROM:<nganpinatawwk@gmail.com>
+  rcpt to:<nganpinatawwk@gmail.com>
+  DATA
+  Subject: what ever the message
+  
+  here to
+  
+  .
+- QUIT > DONE 
