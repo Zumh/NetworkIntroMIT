@@ -1,0 +1,8 @@
+Fetch web page by hand using telnet
+ telnet cs144.keithw.org http
+<ctrl + ]>
+ GET /hello HTTP/1.1 + <ENTER>
+Host: cs144.keithw.org + <ENTER>
+Connection: close + <ENTER>
+<ENTER>
+You will get a success response or failure
