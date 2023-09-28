@@ -9,23 +9,28 @@ using namespace std;
 
 void get_URL( const string& host, const string& path )
 {
-  cerr << "Function called: get_URL(" << host << ", " << path << ")\n";
   
-  string request = "GET " + path + " HTTP/1.1\r\n" +
-                              "Host: " + host + "\r\n" +
-                              "Connection: close\r\n\r\n";
+
+  string request = "GET " + path + " HTTP/1.1\r\n" + "Host: " + host + "\r\n" + "Connection: close\r\n\r\n";
 
   string service = "http";
   // like telnet > telnet cs144.keithw.org http
   TCPSocket tcpSock;
   string output;
-  tcpSock.connect(Address{host, service});
+  string result;
+  tcpSock.connect( Address { host, service } );
   // write datagram
-  tcpSock.write(request); 
-  tcpSock.read(output);
-  cout << output <<endl;
-  tcpSock.close();
+
+  tcpSock.write( request );
   
+  while ( !tcpSock.eof() ) {
+    tcpSock.read( output );
+    
+    cout << output ;
+  }
+  
+  tcpSock.close();
+  //cerr << "Function called: get_URL(" << host << ", " << path << ")\n";
   //cerr << "Warning: get_URL() has not been implemented yet.\n";
 }
 
@@ -37,9 +42,9 @@ int main( int argc, char* argv[] )
       abort(); // For sticklers: don't try to access argv[0] if argc <= 0.
     }
 
-    // std::span is a C++20 feature that represents a view over a contiguous sequence of elements. It allows you to work with a range of elements without owning or copying them.
-    // auto is a keyword in C++ that tells the compiler to automatically deduce the type of a variable based on its initializer. 
-    // args is span object
+    // std::span is a C++20 feature that represents a view over a contiguous sequence of elements. It allows you to
+    // work with a range of elements without owning or copying them. auto is a keyword in C++ that tells the
+    // compiler to automatically deduce the type of a variable based on its initializer. args is span object
     auto args = span( argv, argc );
 
     // The program takes two command-line arguments: the hostname and "path" part of the URL.
