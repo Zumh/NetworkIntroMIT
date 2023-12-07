@@ -33,3 +33,19 @@ Content-Type: text/plain
 
 Hello, CS144!
 Connection closed by foreign host.
+
+### Different PATH
+
+telnet cs144.keithw.org http
+Trying 104.196.238.229...
+Connected to cs144.keithw.org.
+Escape character is '^]'.
+GET /nph-hasher/xyzzy HTTP/1.1
+Host: cs144.keithw.org
+Connection: close
+
+HTTP/1.1 200 OK
+Content-type: text/plain
+
+7SmXqWkrLKzVBCEalbSPqBcvs11Pw263K7x4Wv3JckI
+Connection closed by foreign host.

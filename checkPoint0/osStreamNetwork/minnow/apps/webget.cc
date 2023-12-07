@@ -1,5 +1,7 @@
+#include "address.hh"
 #include "socket.hh"
 
+#include <cstdio>
 #include <cstdlib>
 #include <iostream>
 #include <span>
@@ -9,42 +11,32 @@ using namespace std;
 
 void get_URL( const string& host, const string& path )
 {
-  
-
-  string request = "GET " + path + " HTTP/1.1\r\n" + "Host: " + host + "\r\n" + "Connection: close\r\n\r\n";
-
+  string url = "GET " + path + " HTTP/1.1\r\n" + "Host: "+ host + "\r\n" + "Connection: close" + "\r\n\r\n";
   string service = "http";
-  // like telnet > telnet cs144.keithw.org http
-  TCPSocket tcpSock;
-  string output;
-  string result;
-  tcpSock.connect( Address { host, service } );
-  // write datagram
 
-  tcpSock.write( request );
-  
-  while ( !tcpSock.eof() ) {
-    tcpSock.read( output );
-    
-    cout << output ;
+  TCPSocket tcp;
+  string output;
+  // connect to the network
+  tcp.connect(Address{host, service});
+  // after connection we request url
+  tcp.write(url);
+
+  while(!tcp.eof()){
+    tcp.read(output);
+    cout << output;
   }
-  
-  tcpSock.close();
-  //cerr << "Function called: get_URL(" << host << ", " << path << ")\n";
-  //cerr << "Warning: get_URL() has not been implemented yet.\n";
+  tcp.close();
+  // cerr << "Function called: get_URL(" << host << ", " << path << ")\n";
+  // cerr << "Warning: get_URL() has not been implemented yet.\n";
 }
 
 int main( int argc, char* argv[] )
 {
   try {
     if ( argc <= 0 ) {
-      // abort() is a function that is part of the C Standard Library
       abort(); // For sticklers: don't try to access argv[0] if argc <= 0.
     }
 
-    // std::span is a C++20 feature that represents a view over a contiguous sequence of elements. It allows you to
-    // work with a range of elements without owning or copying them. auto is a keyword in C++ that tells the
-    // compiler to automatically deduce the type of a variable based on its initializer. args is span object
     auto args = span( argv, argc );
 
     // The program takes two command-line arguments: the hostname and "path" part of the URL.
